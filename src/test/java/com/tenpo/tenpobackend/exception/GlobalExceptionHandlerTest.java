@@ -2,6 +2,7 @@ package com.tenpo.tenpobackend.exception;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,5 +40,31 @@ class GlobalExceptionHandlerTest {
         // Then
         assertEquals(500, response.getStatusCode().value());
         assertEquals("Internal error", response.getBody());
+    }
+
+    @Test
+    void shouldHandleInvalidTransactionException() {
+        // Given
+        InvalidTransactionException exception = new InvalidTransactionException("Invalid transaction details");
+
+        // When
+        ResponseEntity<String> response = globalExceptionHandler.handleInvalidTransactionException(exception);
+
+        // Then
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals("Invalid transaction details", response.getBody());
+    }
+
+    @Test
+    void shouldHandleTransactionLimitExceededException() {
+        // Given
+        TransactionLimitExceededException exception = new TransactionLimitExceededException("Transaction limit exceeded");
+
+        // When
+        ResponseEntity<String> response = globalExceptionHandler.handleTransactionLimitExceededException(exception);
+
+        // Then
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals("Transaction limit exceeded", response.getBody());
     }
 }

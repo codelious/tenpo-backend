@@ -1,5 +1,7 @@
 package com.tenpo.tenpobackend.service;
 
+import com.tenpo.tenpobackend.exception.InvalidTransactionException;
+import com.tenpo.tenpobackend.exception.TransactionLimitExceededException;
 import com.tenpo.tenpobackend.exception.TransactionNotFoundException;
 import com.tenpo.tenpobackend.model.Transaction;
 import com.tenpo.tenpobackend.repository.TransactionRepository;
@@ -13,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -136,5 +139,26 @@ class TransactionServiceImplTest {
 
         // Check the delete method was used
         verify(transactionRepository, times(1)).delete(transaction);
+    }
+
+    @Test
+    @DisplayName("Should throw exception if transaction amount is negative")
+    void shouldThrowExceptionIfTransactionAmountIsNegative() {
+        transaction.setAmount(-100);
+        assertThrows(InvalidTransactionException.class, () -> transactionService.saveTransaction(transaction));
+    }
+
+    @Test
+    @DisplayName("Should throw exception if transaction date is in the future")
+    void shouldThrowExceptionIfTransactionDateIsInFuture() {
+        transaction.setTransactionDate(LocalDateTime.now().plusDays(1));
+        assertThrows(InvalidTransactionException.class, () -> transactionService.saveTransaction(transaction));
+    }
+
+    @Test
+    @DisplayName("Should throw exception if user exceeds transaction limit")
+    void shouldThrowExceptionIfUserExceedsTransactionLimit() {
+        when(transactionRepository.findByUsername(transaction.getUsername())).thenReturn(Collections.nCopies(100, transaction));
+        assertThrows(TransactionLimitExceededException.class, () -> transactionService.saveTransaction(transaction));
     }
 }
