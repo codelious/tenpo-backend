@@ -14,10 +14,10 @@ import java.util.List;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
-    public static final String TRANSACTION_NOT_FOUND_WITH_ID = "Transaction not found with id: ";
-    public static final String USER_CANNOT_HAVE_MORE_THAN_100_TRANSACTIONS = "User cannot have more than 100 transactions";
-    public static final String TRANSACTION_AMOUNT_CANNOT_BE_NEGATIVE = "Transaction amount cannot be negative";
-    public static final String TRANSACTION_DATE_CANNOT_BE_IN_THE_FUTURE = "Transaction date cannot be in the future";
+    public static final String TRANSACTION_NOT_FOUND_WITH_ID = "Transacción no encontrada con id: ";
+    public static final String USER_CANNOT_HAVE_MORE_THAN_100_TRANSACTIONS = "El usuario no puede tener más de 100 transacciones.";
+    public static final String TRANSACTION_AMOUNT_CANNOT_BE_NEGATIVE = "El monto de la transacción no puede ser negativo";
+    public static final String TRANSACTION_DATE_CANNOT_BE_IN_THE_FUTURE = "La fecha de la transacción no puede ser en el futuro.";
     private final TransactionRepository transactionRepository;
 
     @Autowired
@@ -61,6 +61,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction updateTransaction(Long id, Transaction transaction) {
+        validateTransaction(transaction);
         Transaction existingTransaction = getTransactionById(id);
         existingTransaction.setAmount(transaction.getAmount());
         existingTransaction.setMerchant(transaction.getMerchant());
