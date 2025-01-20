@@ -47,6 +47,7 @@ public class RateLimitingInterceptor implements HandlerInterceptor {
 
     private Bucket createNewBucket(String clientId) {
         // Create a new bucket with a limit of 3 tokens per minute.
+        // .refillIntervally es mas estricto y refillGreedy es mas permisivo
         return Bucket.builder()
                 .addLimit(limit -> limit.capacity(3).refillIntervally(3, Duration.ofMinutes(1)))
                 .build();
