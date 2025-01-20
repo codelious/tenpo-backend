@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/transactions")
 @Tag(name = "Transaction API", description = "API for managing transactions")
+@CrossOrigin(origins = "*")
 public class TransactionController {
 
     private final TransactionService transactionService;
