@@ -1,87 +1,77 @@
 # Tenpo Backend
 
-Tenpo Backend is a Spring Boot application designed to manage transactions with features like rate limiting and OpenAPI documentation.
+Tenpo Backend es una aplicación Spring Boot diseñada para gestionar transacciones con funciones como limitación de tasa y documentación OpenAPI.
 
-## Prerequisites
+- Author: Rodrigo Espinoza A.
+- Email: rodrigo.espinoza.aguayo@gmail.com
+
+## Pre requisitos
 
 - Java 17 or higher
 - Gradle 7.0 or higher
 - Docker (optional for running with Docker)
 
-## Installation
+## Instalación
 
-1. Clone the repository:
+1. Clonar el repositorio:
 
    ```bash
    git clone https://github.com/codelious/tenpo-backend.git
    cd tenpo-backend
    ```
 
-2. Build the project using Gradle:
+2. Construir el proyecto usando Gradle:
 
    ```bash
    ./gradlew build
    ```
 
-## Running the Application
+## Ejecutando la Aplicación
 
-### Using Gradle
+### Usando Gradle
 
-1. Run the application:
+1. Ejecutar la aplicación:
 
    ```bash
    ./gradlew bootRun
    ```
 
-2. The application will start and be accessible at `http://localhost:8080`.
+2. La aplicación se iniciará y será accesible en `http://localhost:8080`.
 
-### Using Docker (Optional)
+### Usando Docker (Opcional)
 
-1. Build the Docker image:
+1. Construir la imagen Docker:
 
    ```bash
    docker build -t tenpo-backend .
    ```
 
-2. Run the Docker container:
+2. Ejecutar el contenedor de Docker:
 
    ```bash
    docker run -p 8080:8080 tenpo-backend
    ```
 
-## Accessing the API Documentation
+## Accediendo a la documentación API
 
-The API documentation is automatically generated using Swagger and is accessible at:
+La documentación de la API se genera automáticamente utilizando Swagger y está accesible en:
 
 - Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 
-## Features
+## Características
 
-- **Rate Limiting**: Limits the number of requests per client to prevent abuse.
-- **Transaction Management**: Create, read, update, and delete transactions.
-- **OpenAPI Documentation**: Automatically generated API documentation.
+- **Rate Limiting**: Limita el número de solicitudes por cliente para evitar abusos.
+- **Transaction Management**: Transacciones create, read, update, y delete.
+- **OpenAPI Documentation**: Documentación API generada automáticamente.
 
 ## Endpoints
 
-Refer to the Swagger UI for a detailed list of endpoints and their usage.
+Consulte la interfaz de usuario de Swagger para obtener una lista detallada de los endpoints y su uso.
 
 ## Testing
 
-Run tests using Gradle:
+Ejecutar los test usando Gradle:
 
 ```bash
 ./gradlew test
 ```
-
-## Contributing
-
-Feel free to fork the repository and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
----
-
-Enjoy using Tenpo Backend! If you have any questions or need further assistance, feel free to reach out.
-
