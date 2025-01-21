@@ -108,7 +108,7 @@ class TransactionServiceImplTest {
         Exception exception = assertThrows(TransactionNotFoundException.class, () -> transactionService.getTransactionById(1L));
 
         // Check the exception message
-        assertEquals("Transaction not found with id: 1", exception.getMessage());
+        assertEquals("Transacción no encontrada con id: 1", exception.getMessage());
     }
 
     @Test
